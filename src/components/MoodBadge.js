@@ -1,16 +1,23 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { MOODS, SPACE, RADIUS, TYPO } from '../styles/tokens';
+import { COLORS, MOODS } from '../styles/tokens';
 
-export default function MoodBadge({ mood }) {
-  const m = MOODS[mood] || MOODS.tenang;
+export default function MoodBadge({ mood = 'senang' }) {
+  const item = MOODS[mood] || MOODS.senang;
+
   return (
     <View
-      style={[styles.badge, { borderColor: m.border, backgroundColor: m.bg }]}
-      accessible
-      accessibilityLabel={`Mood ${m.label}`}
+      style={[
+        styles.badge,
+        {
+          backgroundColor: item.bg,
+          borderColor: item.border,
+        },
+      ]}
     >
-      <Text style={[styles.text, { color: m.text }]}>{m.label}</Text>
+      <Text style={[styles.text, { color: item.text }]}>
+        {item.emoji} {item.label}
+      </Text>
     </View>
   );
 }
@@ -18,11 +25,13 @@ export default function MoodBadge({ mood }) {
 const styles = StyleSheet.create({
   badge: {
     alignSelf: 'flex-start',
-    borderWidth: 1.5,
-    borderRadius: RADIUS.pill,
-    paddingHorizontal: SPACE.m,
-    paddingVertical: SPACE.xs,
-    marginBottom: SPACE.s,
+    borderWidth: 1,
+    borderRadius: 999,
+    paddingHorizontal: 9,
+    paddingVertical: 5,
   },
-  text: { fontSize: TYPO.caption, fontWeight: '700' },
+  text: {
+    fontSize: 10,
+    fontWeight: '700',
+  },
 });

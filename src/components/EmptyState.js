@@ -1,24 +1,43 @@
 import React from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { COLORS, SPACE, RADIUS, TYPO, MIN_TOUCH, SHADOW } from '../styles/tokens';
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+} from 'react-native';
 
-export default function EmptyState({ onReload }) {
+import {
+  COLORS,
+  MIN_TOUCH,
+} from '../styles/tokens';
+
+export default function EmptyState({ hasQuery, onClear }) {
   return (
-    <View style={styles.wrap} accessible accessibilityLabel="Belum ada entri diary">
-      <Text style={styles.emoji}>🌷</Text>
-      <Text style={styles.title}>Belum ada entri</Text>
-      <Text style={styles.desc}>
-        Buku harianmu masih kosong. Mulai tulis cerita hari ini, atau muat ulang
-        kalau kamu merasa seharusnya ada entri di sini.
+    <View style={styles.card}>
+      <Text style={styles.emoji}>☁️</Text>
+
+      <Text style={styles.title}>
+        {hasQuery
+          ? 'Cerita tidak ditemukan'
+          : 'Belum ada cerita'}
       </Text>
-      {onReload && (
+
+      <Text style={styles.text}>
+        {hasQuery
+          ? 'Coba kata kunci yang berbeda.'
+          : 'Yuk, tulis momen pertamamu hari ini.'}
+      </Text>
+
+      {hasQuery && (
         <Pressable
-          onPress={onReload}
-          accessibilityRole="button"
-          accessibilityLabel="Muat ulang entri"
+          onPress={onClear}
           style={styles.button}
+          accessibilityRole="button"
+          accessibilityLabel="Hapus pencarian"
         >
-          <Text style={styles.buttonText}>Muat ulang</Text>
+          <Text style={styles.buttonText}>
+            Hapus pencarian
+          </Text>
         </Pressable>
       )}
     </View>
@@ -26,26 +45,46 @@ export default function EmptyState({ onReload }) {
 }
 
 const styles = StyleSheet.create({
-  wrap: {
+  card: {
     alignItems: 'center',
-    paddingVertical: 40,
-    paddingHorizontal: SPACE.xl,
-    borderRadius: RADIUS.card,
+    padding: 28,
     backgroundColor: COLORS.surface,
+    borderRadius: 22,
+    marginTop: 8,
     borderWidth: 1,
     borderColor: COLORS.border,
-    ...SHADOW,
   },
-  emoji: { fontSize: 48, marginBottom: SPACE.m },
-  title: { fontSize: TYPO.title, fontWeight: '700', color: COLORS.text, marginBottom: SPACE.s },
-  desc: { fontSize: TYPO.body, color: COLORS.muted, textAlign: 'center', lineHeight: 20 },
+
+  emoji: {
+    fontSize: 36,
+    marginBottom: 10,
+  },
+
+  title: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: COLORS.text,
+  },
+
+  text: {
+    fontSize: 12,
+    color: COLORS.muted,
+    textAlign: 'center',
+    marginTop: 6,
+    lineHeight: 18,
+  },
+
   button: {
-    marginTop: SPACE.l,
+    marginTop: 12,
     minHeight: MIN_TOUCH,
-    paddingHorizontal: SPACE.xl,
+    paddingHorizontal: 16,
     justifyContent: 'center',
-    borderRadius: RADIUS.pill,
-    backgroundColor: COLORS.accent,
+    borderRadius: 18,
+    backgroundColor: COLORS.accentSoft,
   },
-  buttonText: { color: '#fff', fontWeight: '700' },
+
+  buttonText: {
+    color: COLORS.accentDeep,
+    fontWeight: '700',
+  },
 });

@@ -1,8 +1,8 @@
 # Diary App
  
 **Nama:** Diana Anis Fardah
-**NIM:** [isi NIM]
-**Kelas:** [isi kelas]
+**NIM:** 2430511046
+**Kelas:** 5c
  
 ## Cara Menjalankan
 1. Pastikan Node.js sudah terpasang.
@@ -22,8 +22,10 @@
 - Skeleton loader ditampilkan sebagai penanda saat menunggu data.
  
 ## Screenshot
-- screenshots/1-kolom.png
-- screenshots/2-kolom.png
+![Diary App Tampilan 1 Kolom](screenshots/1-Kolom.jpeg)
+
+### Tampilan 2 Kolom
+![Diary App Tampilan 2 Kolom](screenshots/2-kolom.png)
  
 ## Catatan Breakpoint 600 px
 Lebar layar dibaca dengan useWindowDimensions. Jika width >= 600,

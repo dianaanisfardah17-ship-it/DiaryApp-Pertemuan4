@@ -1,55 +1,104 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Animated, StyleSheet } from 'react-native';
-import { COLORS, SPACE, RADIUS, SHADOW } from '../styles/tokens';
+import React from 'react';
+import {
+  View,
+  StyleSheet,
+} from 'react-native';
 
-export default function SkeletonCard() {
-  const opacity = useRef(new Animated.Value(0.4)).current;
+import {
+  COLORS,
+  RADIUS,
+} from '../styles/tokens';
 
-  useEffect(() => {
-    const loop = Animated.loop(
-      Animated.sequence([
-        Animated.timing(opacity, { toValue: 1, duration: 700, useNativeDriver: true }),
-        Animated.timing(opacity, { toValue: 0.4, duration: 700, useNativeDriver: true }),
-      ])
-    );
-    loop.start();
-    return () => loop.stop();
-  }, [opacity]);
-
+export default function SkeletonCard({ twoColumns = false }) {
   return (
-    <Animated.View
-      style={[styles.card, { opacity }]}
-      accessible
-      accessibilityLabel="Memuat entri diary"
+    <View
+      style={[
+        styles.card,
+        twoColumns ? styles.grid : styles.list,
+      ]}
     >
-      <View style={styles.avatar} />
+      <View
+        style={[
+          styles.block,
+          twoColumns ? styles.gridImage : styles.listImage,
+        ]}
+      />
+
       <View style={styles.content}>
-        <View style={[styles.line, { width: '60%', height: 16 }]} />
-        <View style={[styles.line, { width: '30%' }]} />
-        <View style={[styles.line, { width: '100%' }]} />
-        <View style={[styles.line, { width: '85%' }]} />
+        <View
+          style={[
+            styles.block,
+            { width: '38%', height: 9 },
+          ]}
+        />
+
+        <View
+          style={[
+            styles.block,
+            { width: '78%', height: 15 },
+          ]}
+        />
+
+        <View
+          style={[
+            styles.block,
+            { width: '95%', height: 10 },
+          ]}
+        />
+
+        <View
+          style={[
+            styles.block,
+            { width: '68%', height: 10 },
+          ]}
+        />
       </View>
-    </Animated.View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: 'row',
-    gap: SPACE.m,
-    padding: SPACE.l,
-    borderWidth: 1,
-    borderLeftWidth: 5,
-    borderColor: COLORS.border,
-    borderRadius: RADIUS.card,
     backgroundColor: COLORS.surface,
-    ...SHADOW,
+    borderRadius: RADIUS.card,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    overflow: 'hidden',
   },
-  avatar: {
-    width: 72, height: 72,
-    borderRadius: RADIUS.avatar,
+
+  list: {
+    flexDirection: 'row',
+    gap: 12,
+    minHeight: 145,
+  },
+
+  grid: {
+    flex: 1,
+    minHeight: 300,
+  },
+
+  block: {
     backgroundColor: COLORS.skeleton,
+    borderRadius: 8,
   },
-  content: { flex: 1, gap: SPACE.s },
-  line: { height: 12, borderRadius: 6, backgroundColor: COLORS.skeleton },
+
+  listImage: {
+    width: 94,
+    height: 118,
+    borderRadius: 15,
+  },
+
+  gridImage: {
+    width: '100%',
+    height: 135,
+    marginBottom: 12,
+    borderRadius: 15,
+  },
+
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    gap: 10,
+  },
 });

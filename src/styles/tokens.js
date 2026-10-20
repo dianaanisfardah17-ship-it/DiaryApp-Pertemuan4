@@ -1,34 +1,102 @@
 export const COLORS = {
-  bg: '#FFF1F7',          // pink sangat muda
+  bg: '#FAF7FF',
   surface: '#FFFFFF',
-  border: '#FBCFE8',      // pink pastel
-  text: '#4A1D36',        // plum gelap
-  muted: '#7A4A63',       // kontras baik di atas putih & pink muda
-  accent: '#DB2777',      // pink utama (teks putih di atasnya tetap terbaca)
-  accentSoft: '#FCE7F3',
-  accentDeep: '#BE185D',
-  skeleton: '#FBE1EE',
-  overlay: 'rgba(74, 29, 54, 0.55)',
+  border: '#E8DDF4',
+  text: '#392650',
+  muted: '#89799D',
+  accent: '#7651A8',
+  accentSoft: '#EEE5FC',
+  accentDeep: '#593783',
+  skeleton: '#E9DFF3',
+  overlay: 'rgba(57, 38, 80, 0.72)',
+  pink: '#FCEAF3',
 };
-export const SPACE = { xs: 4, s: 8, m: 12, l: 16, xl: 24 };
-export const RADIUS = { card: 20, avatar: 36, pill: 999, sheet: 28 };
-export const TYPO = { h1: 28, title: 16, body: 14, caption: 12 };
-export const BREAKPOINTS = { tablet: 600 };
+
+export const SPACE = {
+  xs: 4,
+  s: 8,
+  m: 12,
+  l: 16,
+  xl: 24,
+};
+
+export const RADIUS = {
+  card: 20,
+  avatar: 18,
+  pill: 999,
+  sheet: 28,
+};
+
+export const TYPO = {
+  h1: 28,
+  title: 16,
+  body: 14,
+  caption: 12,
+};
+
+export const BREAKPOINTS = {
+  tablet: 600,
+};
+
 export const MIN_TOUCH = 48;
 export const MAX_WIDTH = 960;
 
 export const SHADOW = {
-  shadowColor: '#DB2777',
-  shadowOpacity: 0.14,
-  shadowRadius: 14,
-  shadowOffset: { width: 0, height: 6 },
+  shadowColor: '#675080',
+  shadowOpacity: 0.09,
+  shadowRadius: 12,
+  shadowOffset: { width: 0, height: 4 },
   elevation: 3,
 };
 
 export const MOODS = {
-  senang:   { label: 'Senang',   border: '#B45309', bg: '#FFFBEB', text: '#92400E' },
-  tenang:   { label: 'Tenang',   border: '#0F766E', bg: '#F0FDFA', text: '#115E59' },
-  fokus:    { label: 'Fokus',    border: '#1D4ED8', bg: '#EFF6FF', text: '#1E3A8A' },
-  semangat: { label: 'Semangat', border: '#B91C1C', bg: '#FEF2F2', text: '#991B1B' },
-  santai:   { label: 'Santai',   border: '#7E22CE', bg: '#FAF5FF', text: '#6B21A8' },
+  senang: {
+    label: 'Senang',
+    emoji: '😊',
+    border: '#C084FC',
+    bg: '#F3E8FF',
+    text: '#6B21A8',
+  },
+  tenang: {
+    label: 'Tenang',
+    emoji: '😌',
+    border: '#34A89A',
+    bg: '#E7F8F3',
+    text: '#16665C',
+  },
+  fokus: {
+    label: 'Fokus',
+    emoji: '📝',
+    border: '#7298E8',
+    bg: '#EAF0FF',
+    text: '#254A91',
+  },
+  semangat: {
+    label: 'Semangat',
+    emoji: '✨',
+    border: '#E5A34D',
+    bg: '#FFF3DE',
+    text: '#8A5012',
+  },
+  santai: {
+    label: 'Santai',
+    emoji: '🌷',
+    border: '#B18AE0',
+    bg: '#F4ECFF',
+    text: '#68449A',
+  },
+  sedih: {
+    label: 'Sedih',
+    emoji: '😢',
+    border: '#5D9AD7',
+    bg: '#EAF4FF',
+    text: '#245787',
+  },
+  marah: {
+    label: 'Marah',
+    emoji: '😡',
+    border: '#D97777',
+    bg: '#FFF0F0',
+    text: '#963939',
+  },
 };

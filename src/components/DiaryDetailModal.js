@@ -1,50 +1,115 @@
 import React from 'react';
-import { Modal, View, Text, Image, ScrollView, StyleSheet, Pressable, Platform } from 'react-native';
-import { COLORS, SPACE, RADIUS, TYPO, MIN_TOUCH } from '../styles/tokens';
+
+import {
+  Modal,
+  View,
+  Text,
+  Image,
+  Pressable,
+  StyleSheet,
+  ScrollView,
+  Platform,
+  StatusBar,
+} from 'react-native';
+
 import MoodBadge from './MoodBadge';
 
-export default function DiaryDetailModal({ visible, onClose, entry }) {
+import {
+  COLORS,
+  SPACE,
+  RADIUS,
+  MIN_TOUCH,
+} from '../styles/tokens';
+
+const formatDate = (value) => {
+  const date = new Date(`${value}T00:00:00`);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return date.toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+};
+
+export default function DiaryDetailModal({
+  visible,
+  entry,
+  onClose,
+}) {
   if (!entry) return null;
-  const { title, date, body, heroUri, mood } = entry;
-  const src = heroUri || entry.moodUri;
-  const imageSource = typeof src === 'string' ? { uri: src } : src;
+
+  const imageSource =
+    entry.heroUri ||
+    entry.moodImage ||
+    require('../../assets/moods/pagi.jpeg');
 
   return (
-    <Modal visible={visible} animationType="slide" onRequestClose={onClose}>
+    <Modal
+      visible={visible}
+      animationType="slide"
+      presentationStyle="fullScreen"
+      onRequestClose={onClose}
+    >
       <View style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <StatusBar
+          barStyle="dark-content"
+          backgroundColor={COLORS.bg}
+        />
+
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+        >
           <Image
             source={imageSource}
-            resizeMode="cover"
             style={styles.hero}
-            accessibilityLabel={`Gambar untuk entri ${title}`}
+            resizeMode="cover"
           />
+
           <View style={styles.sheet}>
-            {mood ? <MoodBadge mood={mood} /> : null}
-            <Text style={styles.title} accessibilityRole="header">{title}</Text>
-            <Text style={styles.date}>{date}</Text>
+            <MoodBadge mood={entry.mood} />
+
+            <Text style={styles.title}>
+              {entry.title}
+            </Text>
+
+            <Text style={styles.date}>
+              {formatDate(entry.date)}
+            </Text>
+
             <View style={styles.divider} />
-            <Text style={styles.body}>{body}</Text>
+
+            <Text style={styles.body}>
+              {entry.body ||
+                entry.preview ||
+                'Belum ada isi cerita.'}
+            </Text>
           </View>
         </ScrollView>
 
         <Pressable
           onPress={onClose}
-          accessibilityRole="button"
-          accessibilityLabel="Tutup detail entri"
           style={styles.closeFab}
+          accessibilityRole="button"
+          accessibilityLabel="Tutup detail diary"
         >
-          <Text style={styles.closeFabText}>✕</Text>
+          <Text style={styles.closeFabText}>×</Text>
         </Pressable>
 
         <View style={styles.footer}>
           <Pressable
             onPress={onClose}
-            accessibilityRole="button"
-            accessibilityLabel="Tutup detail entri"
             style={styles.button}
+            accessibilityRole="button"
+            accessibilityLabel="Kembali ke buku harian"
           >
-            <Text style={styles.buttonText}>Tutup</Text>
+            <Text style={styles.buttonText}>
+              Kembali ke buku harian
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -53,45 +118,95 @@ export default function DiaryDetailModal({ visible, onClose, entry }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.bg },
-  hero: { width: '100%', aspectRatio: 16 / 9, backgroundColor: COLORS.border },
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.bg,
+  },
+
+  scrollContent: {
+    paddingBottom: 20,
+  },
+
+  hero: {
+    width: '100%',
+    height: 310,
+    backgroundColor: COLORS.accentSoft,
+  },
+
   sheet: {
-    marginTop: -SPACE.xl,
+    marginTop: -24,
     padding: SPACE.xl,
+    paddingBottom: 30,
     backgroundColor: COLORS.bg,
     borderTopLeftRadius: RADIUS.sheet,
     borderTopRightRadius: RADIUS.sheet,
+    gap: 10,
   },
-  title: { fontSize: 24, fontWeight: '800', color: COLORS.text },
-  date: { fontSize: TYPO.caption, color: COLORS.muted, marginTop: SPACE.xs },
+
+  title: {
+    fontSize: 25,
+    lineHeight: 33,
+    fontWeight: '800',
+    color: COLORS.text,
+    marginTop: 8,
+  },
+
+  date: {
+    fontSize: 12,
+    color: COLORS.muted,
+  },
+
   divider: {
-    height: 3, width: 48, borderRadius: 2,
-    backgroundColor: COLORS.accent,
-    marginVertical: SPACE.l,
+    height: 4,
+    width: 48,
+    borderRadius: 4,
+    backgroundColor: '#D4BDEB',
+    marginVertical: 14,
   },
-  body: { fontSize: 15, color: COLORS.text, lineHeight: 24 },
+
+  body: {
+    fontSize: 15,
+    color: '#59446D',
+    lineHeight: 26,
+  },
+
   closeFab: {
     position: 'absolute',
-    top: Platform.OS === 'ios' ? 52 : SPACE.l,
-    right: SPACE.l,
-    width: 44, height: 44,
-    borderRadius: 22,
-    alignItems: 'center', justifyContent: 'center',
+    top: Platform.OS === 'ios' ? 54 : 24,
+    right: 18,
+    width: MIN_TOUCH,
+    height: MIN_TOUCH,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: COLORS.overlay,
   },
-  closeFabText: { color: '#fff', fontSize: 18, fontWeight: '700' },
+
+  closeFabText: {
+    color: '#FFFFFF',
+    fontSize: 28,
+    lineHeight: 30,
+    fontWeight: '600',
+  },
+
   footer: {
     padding: SPACE.l,
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
     backgroundColor: COLORS.surface,
   },
+
   button: {
     minHeight: MIN_TOUCH,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: RADIUS.pill,
+    borderRadius: 24,
     backgroundColor: COLORS.accent,
   },
-  buttonText: { color: '#fff', fontWeight: '700', fontSize: TYPO.body },
+
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: '800',
+    fontSize: 14,
+  },
 });
