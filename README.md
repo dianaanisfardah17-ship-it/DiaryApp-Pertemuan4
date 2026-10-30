@@ -39,18 +39,18 @@
 ## 3. Screenshot Aplikasi
 
 ### Tampilan 1 Kolom
-![Tampilan 1 Kolom](screenshots/1-kolom.png)
+![Tampilan 1 Kolom](screenshot/1-kolom.png)
 
 ### Daftar Diary
-![Daftar Diary](screenshots/list.png)
+![Daftar Diary](screenshot/list.png)
 
 ### Hasil Pencarian
-![Hasil Search](screenshots/hasil-search.png)
+![Hasil Search](screenshot/hasil-search.png)
 
 ### Form Tulis Diary
-![Tulis Diary](screenshots/tulis-diary.png)
+![Tulis Diary](screenshot/tulis-diary.png)
 
-![Tulis Diary 2](screenshots/tulis-diary2.png)
+![Tulis Diary 2](screenshot/tulis-diary2.png)
 
 ### Tampilan 2 Kolom
 ![Tampilan 2 Kolom](screenshots/2kolom.png)
