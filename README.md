@@ -55,3 +55,6 @@
 ### Tampilan 2 Kolom
 ![Tampilan 2 Kolom](screenshot/2kolom.png)
 
+### Modal detail
+![Tampilan 2 Kolom](screenshot/modal-detail.png)
+
