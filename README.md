@@ -53,5 +53,5 @@
 ![Tulis Diary 2](screenshot/tulis-diary2.png)
 
 ### Tampilan 2 Kolom
-![Tampilan 2 Kolom](screenshots/2kolom.png)
+![Tampilan 2 Kolom](screenshot/2kolom.png)
 
